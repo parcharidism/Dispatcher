@@ -85,6 +85,10 @@ public class Utils {
         }
     }
 
+    /**
+     * Loops and prints the stats of the finished processes contained in the deadQueue
+     * @param ArrayList deadQueue 
+     */
     static void printStats(ArrayList<Process> deadQueue) {
         System.out.println();
         System.out.println("----------------------------------------------");
