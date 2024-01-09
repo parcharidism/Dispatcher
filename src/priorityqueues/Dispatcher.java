@@ -92,6 +92,7 @@ public class Dispatcher {
                             if (!p.hasArrived()) {
                                 p.setResponseTime(timeNow - p.getArrivalTime());
                                 p.setHasArrived(true);
+                                System.out.println("Process ID: " + p.getPid() + " has just arrived. Time now is: " + timeNow);
                             }
 
                             readyQueue.add((Process) pq.remove(0));
@@ -105,7 +106,7 @@ public class Dispatcher {
             if (!readyQueue.isEmpty()) {
                 p = readyQueue.get(0);
                 // Εκτέλεση διεργασίας στην ουρά και εναπόθεση στην τελευταία θέση εάν έχει ακόμη burst
-                // Εαν η διεργασία έχει μικρό χρόνο από το quantum εκτέλεσέ την και φύγε            
+                // Εαν η διεργασία έχει μικρότερο χρόνο από το quantum εκτέλεσέ την και φύγε            
                 quantumRem = quantumRem <= p.getBurst() ? userQ : p.getBurst();
                 while (quantumRem > 0) {
                     p.reduceBurst(1);
@@ -118,7 +119,6 @@ public class Dispatcher {
                 p = readyQueue.remove(0);
                 if (p.getBurst() > 0) {
                     // Θέσε το arrival time της Process τελευταίο και τοποθέτησέ την στην αρχή της λίστας προτεραιότητάς της
-                    //p.setArrivalTime(Utils.findLastProcessArrival(p.getPriority()) + 1);
                     Utils.putInQueue(p);
 
                 } else { // Δεν έχει άλλο burst, σημείωσε το turnaroud time
@@ -130,7 +130,9 @@ public class Dispatcher {
             } else {
                 timeNow++; // Περνάει ο χρόνος - Περίπτωση χωρίς διεργασίες στην readyqueue
             }
-
+            
+            // Για debug λόγους
+            System.out.println("Time before generating new process is: " + timeNow);
             // Δημιουργία νέας τυχαίας διεργασίας
             Utils.generateNewProcess(timeNow);
 

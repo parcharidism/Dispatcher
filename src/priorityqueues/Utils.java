@@ -33,6 +33,7 @@ public class Utils {
 
         int arrival = rndGen(timeNow + 1, timeNow + 5);
         Process p = new Process(arrival, burst, priority, getnewpid());
+        p.printProperties();
         putInQueue(p);
 
     }
@@ -86,8 +87,10 @@ public class Utils {
     }
 
     /**
-     * Loops and prints the stats of the finished processes contained in the deadQueue
-     * @param ArrayList deadQueue 
+     * Loops and prints the stats of the finished processes contained in the
+     * deadQueue
+     *
+     * @param ArrayList deadQueue
      */
     static void printStats(ArrayList<Process> deadQueue) {
         System.out.println();

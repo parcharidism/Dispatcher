@@ -105,8 +105,13 @@ public class Process {
     }
 
     void printStats() {
-        System.out.println("Process ID: " + getPid() + " has finished executing. Response time: " + getResponseTime()
+        System.out.println("--- Process ID: " + getPid() + " has finished executing. Response time: " + getResponseTime()
                 + " TurnAround time: " + getTurnAroundTime());
+    }
+    
+    void printProperties() {
+        System.out.println("+++ Process ID: " + getPid() + " has been created. Arrival time: " + getArrivalTime()
+                + " Burst time: " + getBurst());
     }
 
 }
